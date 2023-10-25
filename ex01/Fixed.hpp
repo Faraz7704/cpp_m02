@@ -6,15 +6,15 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 19:41:39 by fkhan             #+#    #+#             */
-/*   Updated: 2023/02/05 21:55:00 by fkhan            ###   ########.fr       */
+/*   Updated: 2023/10/25 15:38:44 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-#define FIXED_HPP
+#ifndef     FIXED_HPP
+# define    FIXED_HPP
 
-#include <iostream>
-#include <cmath>
+#include    <iostream>
+#include    <math.h>
 
 class Fixed
 {

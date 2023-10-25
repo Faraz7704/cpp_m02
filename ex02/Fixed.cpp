@@ -6,7 +6,7 @@
 /*   By: fkhan <fkhan@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 19:41:42 by fkhan             #+#    #+#             */
-/*   Updated: 2023/02/05 23:04:37 by fkhan            ###   ########.fr       */
+/*   Updated: 2023/10/25 15:46:04 by fkhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Fixed::Fixed(const int n) : _fixedPointValue(n << _fractionalBits)
 {
 }
 
-Fixed::Fixed(const float n) : _fixedPointValue(std::roundf(n * (1 << _fractionalBits)))
+Fixed::Fixed(const float n) : _fixedPointValue(roundf(n * (1 << _fractionalBits)))
 {
 }
 
@@ -103,22 +103,30 @@ bool    Fixed::operator!=(const Fixed &rhs) const
 
 Fixed   Fixed::operator+(const Fixed &rhs) const
 {
-    return Fixed(this->toFloat() + rhs.toFloat());
+    Fixed ret;
+    ret.setRawBits(_fixedPointValue + rhs.getRawBits());
+    return ret;
 }
 
 Fixed   Fixed::operator-(const Fixed &rhs) const
 {
-    return Fixed(this->toFloat() - rhs.toFloat());
+    Fixed ret;
+    ret.setRawBits(_fixedPointValue - rhs.getRawBits());
+    return ret;
 }
 
 Fixed   Fixed::operator*(const Fixed &rhs) const
 {
-    return Fixed(this->toFloat() * rhs.toFloat());
+    Fixed ret;
+    ret.setRawBits((std::size_t)(_fixedPointValue * rhs.getRawBits()) >> _fractionalBits);
+    return ret;
 }
 
 Fixed   Fixed::operator/(const Fixed &rhs) const
 {
-    return Fixed(this->toFloat() / rhs.toFloat());
+    Fixed ret;
+    ret.setRawBits(((std::size_t)_fixedPointValue << _fractionalBits) / rhs.getRawBits());
+    return ret;
 }
 
 //------------------ Increment/Decrement operators ------------------//
